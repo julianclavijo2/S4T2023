@@ -1,0 +1,71 @@
+<form [formGroup]="form" (ngSubmit)="save()" *ngIf="sendForm !== null">
+    <div class="input-container">
+        <label for="">Correo electrónico</label> <br>
+        <input
+        [class.is-valid]="emailField?.valid"
+        [class.is-invalid]="emailField?.invalid && emailField?.touched"
+        type="email"
+        placeholder="Escribe el email del profesor*"
+        formControlName="Email">
+        <br>
+        <small *ngIf="emailField?.touched && emailField?.hasError('required') && emailField?.value == '' ">* Campo requerido (*).</small>
+        <small *ngIf="emailField?.invalid && emailField?.touched && emailField?.value !== '' ">* El correo electrónico no es válido.</small>
+        <br>
+        {{emailField?.valid}} 
+        <br>
+    </div>
+    <br>
+
+    <div class="input-container">
+    <label for="">ID profesor</label> <br>
+        <input
+        [class.is-valid]="idTeacherField?.valid"
+        [class.is-invalid]="!idTeacherField?.valid && idTeacherField?.touched"
+        type="tel"
+        formControlName="Documento"
+        ><br>
+        <small *ngIf="idTeacherField?.touched && idTeacherField?.hasError('required')">* Campo requerido (*).</small>
+        <small *ngIf="idTeacherField?.hasError('minlength')">* La Identificación del profesor debe tener minimo 7.</small>
+        <small *ngIf="idTeacherField?.hasError('maxlength')">* La Identificación del profesor debe tener maximo 10.</small>
+    <br><br>
+
+        {{idTeacherField?.valid}}
+    <br><br>
+    </div>
+    <div class="input-container">
+        <label for="">Nombre completo</label> <br>
+            <input
+            [class.is-valid]="nameField?.valid"
+            [class.is-invalid]="nameField?.invalid && nameField?.touched"
+            type="text"
+            formControlName="NombreCompleto"
+            ><br>
+            <small *ngIf="nameField?.touched  && nameField?.hasError('required') && nameField?.value == '' ">* Campo requerido (*)</small>
+            <small *ngIf="nameField?.hasError('maxlength')">* El nombre  del profesor debe tener maximo 40 caracteres.</small>
+        <br><br>
+    
+            {{nameField?.valid}}
+        <br><br>
+    </div>
+    <div class="input-container">
+        <label for="">Número de celular</label> <br>
+            <input
+            [class.is-valid]="phoneField?.valid"
+            [class.is-invalid]="phoneField?.invalid && phoneField?.touched"
+            type="tel"
+            formControlName="Celular"
+            
+            ><br>
+            <small *ngIf="phoneField?.touched  && phoneField?.hasError('required') && phoneField?.value == '' ">* Campo requerido (*)</small>
+            <small *ngIf="phoneField?.hasError('maxlength')">* El telefono  debe tener maximo 10 caracteres.</small>
+            <small *ngIf="phoneField?.hasError('minlength')">* El telefono  debe tener minimo 10 caracteres.</small>
+        <br><br>
+    
+            {{phoneField?.valid}}
+        <br><br>
+    </div>
+ 
+   
+    <br><br>
+    <button [disabled]="form.invalid" type="submit">Siguiente</button>
+</form>

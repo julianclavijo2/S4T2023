@@ -1,0 +1,19 @@
+select{
+    width: 300px;
+}
+input{
+    width: 300px;
+}
+.is-valid{
+    border: 2px solid rgb(24, 226, 24);
+}
+.is-invalid{
+    border: 2px solid red;
+}
+
+small{
+    transition: all 1s;
+    opacity: 1;
+    color: red;
+    
+}

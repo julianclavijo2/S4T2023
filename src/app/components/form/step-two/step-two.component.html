@@ -1,0 +1,81 @@
+ <form [formGroup]="form" (ngSubmit)="save()">
+
+    <div class="input-container">
+        <label for="">Nombre de la institución educativa</label> <br>
+            <input
+            [class.is-valid]="institutionField?.valid"
+            [class.is-invalid]="institutionField?.invalid && institutionField?.touched"
+            type="text"
+            formControlName="NombreColegio"
+            ><br>
+            <small *ngIf="institutionField?.touched  && institutionField?.hasError('required') && institutionField?.value == '' ">* Campo requerido (*)</small>
+            <small *ngIf="institutionField?.hasError('maxlength')">* El nombre  de la instiución debe tener máximo 100 caracteres.</small>
+        <br><br>
+    
+            {{institutionField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Dirección:</label> <br>
+            <input
+            [class.is-valid]="direccionField?.valid"
+            [class.is-invalid]="direccionField?.invalid && direccionField?.touched"
+            type="text"
+            formControlName="Direccion"
+            ><br>
+            <small *ngIf="direccionField?.touched  && direccionField?.hasError('required') && direccionField?.value == '' ">* Campo requerido (*)</small>
+            <small *ngIf="direccionField?.hasError('maxlength')">* La dirección debe tener máximo 100 caracteres.</small>
+        <br><br>
+    
+            {{direccionField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">País:</label> <br>
+        <select  formControlName="Pais">
+            <option value="Colombia" selected>Colombia</option>
+        </select><br>
+
+        <br><br>
+    
+            {{paidField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Departamento:</label> <br>
+        <select  formControlName="Departamento" (change)="getCityByDepto()">
+            <option value="" selected>Selecciona un departamento (*)</option>
+            <option value="{{department.departamentoID}}" *ngFor="let department of departamentos ">{{department.nombreDepartamento}}</option>
+        </select>
+        <br><br>
+            {{DepartamentoField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Ciudad:</label> <br>
+        <select  formControlName="Ciudad" (change)="getCityByDepto()" (change)="show()">
+            <option value="" selected>Selecciona una ciudad (*)</option>
+            <option value="{{ciudad.ciudadID}}" *ngFor="let ciudad of ciudades ">{{ciudad.nombreCiudad}}</option>
+        </select>
+        <br><br>
+            {{DepartamentoField?.valid}}
+        <br><br>
+    </div>
+
+
+ 
+
+
+
+
+
+
+
+   
+    <br><br>
+    <button [disabled]="form.invalid" type="submit">Siguiente</button>
+</form>

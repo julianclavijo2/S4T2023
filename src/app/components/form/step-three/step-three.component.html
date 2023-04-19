@@ -1,0 +1,114 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+
+    <div class="input-container">
+        <label for="">Nombre de la institución educativa</label> <br>
+        <input [class.is-valid]="NombreEquipoField?.valid"
+            [class.is-invalid]="NombreEquipoField?.invalid && NombreEquipoField?.touched" type="text"
+            formControlName="NombreEquipo"><br>
+        <small
+            *ngIf="NombreEquipoField?.touched  && NombreEquipoField?.hasError('required') && NombreEquipoField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="NombreEquipoField?.hasError('maxlength')">* El nombre de la instiución debe tener máximo 100
+            caracteres.</small>
+        <br><br>
+
+        {{NombreEquipoField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Confirmo que la composición de género del equipo de trabajo de estudiantes es mixta
+            (Masculino/Femenino)*</label> <br>
+        <div>Sí, confirmo<input type="radio" value="true" formControlName="EquipoMixto"></div>
+        <div>No, confirmo<input type="radio" value="false" formControlName="EquipoMixto"></div>
+
+
+        <br><br>
+
+        {{EquipoMixtoField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">¿Cuántos estudiantes componen el grupo de trabajo?</label> <br>
+        <select formControlName="CantEstudiantes" (change)="addStudents()">
+            <option value="" selected>Seleccione el número de estudiantes (*)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select><br>
+
+        <br><br>
+
+        {{CantEstudiantesField?.valid}}
+        <br><br>
+    </div>
+
+
+    <div formArrayName="Integrantes">
+        <div style="border:3px solid black" *ngFor="let integrant of IntegrantesField.controls ; let i = index " [formGroupName]="i">
+
+            <div class="input-container">
+                <label for="">Selecciona el grado del estudiante*</label> <br>
+
+                <select formControlName="EstudianteGrado">
+                    <option value="" selected>Seleccione el número de estudiantes (*)</option>
+                    <option value="8°">8°</option>
+                    <option value="9°">9°</option>
+                    <option value="10°">10°</option>
+                    <option value="11°">11°</option>
+                    <option value="12°">12°</option>
+
+                </select><br>
+
+                <br><br>
+
+                {{CantEstudiantesField?.valid}}
+                <br><br>
+            </div>
+
+            <div class="input-container">
+                <label for="">¿Pertenece a algún grupo étnico?</label> <br>
+                <div>Sí<input type="radio" value="true"  formControlName="EstudianteGrupoEtnico" (change)="test()" ></div>
+                <div>No<input type="radio" value="false"  formControlName="EstudianteGrupoEtnico" (change)="test()"></div>
+
+
+                <br><br>
+
+                {{EquipoMixtoField?.valid}}
+                <br><br>
+            </div>
+
+            <div class="input-container" *ngIf="showDinamicField[i] == 'true'">
+
+                <select formControlName="GrupoEtnico">
+                    <option value="" selected>Cual? </option>
+                    <option value="Mulata">Mulata</option>
+                    <option value="Indígena">Indígena</option>
+                    <option value="Gitanos">Gitanos</option>
+                    <option value="Rom">Rom</option>
+                    <option value="Negritudes">Negritudes</option>
+                    <option value="Afrodescendientes">Afrodescendientes</option>
+                    <option value="Raizales">Raizales</option>
+                    <option value="Palenqueros">Palenqueros</option>
+
+                </select><br>
+
+                <br><br>
+
+                <br><br>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <br><br>
+    <button [disabled]="form.invalid" type="submit">Siguiente</button>
+</form>
