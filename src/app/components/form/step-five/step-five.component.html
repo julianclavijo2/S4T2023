@@ -1,6 +1,51 @@
 <form [formGroup]="form" (ngSubmit)="save()">
 
     <div class="input-container">
+        <label for="">¿Has particiádo en Solve For Tomorrow antes?</label> <br>
+        <div>Sí<input type="radio" value="true" formControlName="ParticipacionAnterior" (change)="pushYear()"></div>
+        <div>No<input type="radio" value="false" formControlName="ParticipacionAnterior" (change)="deleteYear()"></div>
+
+        <br><br>
+
+        {{ParticipacionAnteriorField?.valid}}
+        <br><br>
+    </div>
+
+
+    <div class="input-container" *ngIf="showYears">
+
+        <select formControlName="AnnoParticipacionAnteriorField"  multiple (change)="getOptions()">
+            <option value="" selected>¿En qué año fue? (Selecciona varias opciones si es necesario)</option>
+            <option value="2014">2014</option>
+            <option value="2016">2016</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select><br>
+
+        <br><br>
+
+    
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">¿Has particiádo en Solve For Tomorrow antes?</label> <br><br>
+        <div>Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de Samsung Electronics S.A.<input type="checkbox" value="true" formControlName="ParticipacionAnterior" (change)="pushYear()"></div>
+        <br><br><br>
+        <div>Acepto los términos y condiciones del consurso Solve for tomorrow.
+            (Para inscribir el proyecto exitósamente, el o la docente líder debe leer y aceptar los términos y condiciones haciendo click al finalizar la aplicación. (En el formulario en línea de la página oficial del concurso)<input type="checkbox" value="false" formControlName="ParticipacionAnterior" (change)="deleteYear()"></div>
+
+        <br><br>
+
+        {{ParticipacionAnteriorField?.valid}}
+        <br><br>
+    </div>
+
+    
+<!-- 
+    <div class="input-container">
         <label for="">Nombre del equipo</label> <br>
         <input [class.is-valid]="NombreEquipoField?.valid"
             [class.is-invalid]="NombreEquipoField?.invalid && NombreEquipoField?.touched" type="text"
@@ -16,18 +61,7 @@
         <br><br>
     </div>
 
-    <div class="input-container">
-        <label for="">Confirmo que la composición de género del equipo de trabajo de estudiantes es mixta
-            (Masculino/Femenino)*</label> <br>
-        <div>Sí, confirmo<input type="radio" value="true" formControlName="EquipoMixto"></div>
-        <div>No, confirmo<input type="radio" value="false" formControlName="EquipoMixto"></div>
 
-
-        <br><br>
-
-        {{EquipoMixtoField?.valid}}
-        <br><br>
-    </div>
 
     <div class="input-container">
         <label for="">¿Cuántos estudiantes componen el grupo de trabajo?</label> <br>
@@ -103,7 +137,7 @@
 
 
         </div>
-    </div>
+    </div> -->
 
 
     FORMULARIO INVALIDO ? :{{form.invalid}}

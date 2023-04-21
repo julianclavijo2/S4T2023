@@ -23,6 +23,7 @@
         [class.is-invalid]="!idTeacherField?.valid && idTeacherField?.touched"
         type="tel"
         formControlName="Documento"
+        
         ><br>
         <small *ngIf="idTeacherField?.touched && idTeacherField?.hasError('required')">* Campo requerido (*).</small>
         <small *ngIf="idTeacherField?.hasError('minlength')">* La Identificación del profesor debe tener minimo 7.</small>

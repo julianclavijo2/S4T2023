@@ -7,6 +7,9 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { StepOneComponent } from './form/step-one/step-one.component';
 import { StepTwoComponent } from './form/step-two/step-two.component';
 import { StepThreeComponent } from './form/step-three/step-three.component';
+import { StepFourComponent } from './form/step-four/step-four.component';
+import { StepFiveComponent } from './form/step-five/step-five.component';
+
 
 
 
@@ -17,7 +20,10 @@ import { StepThreeComponent } from './form/step-three/step-three.component';
     FooterComponent,
     StepOneComponent,
     StepTwoComponent,
-    StepThreeComponent
+    StepThreeComponent,
+    StepFourComponent,
+    StepFiveComponent
+
   ],
   imports: [
     CommonModule,

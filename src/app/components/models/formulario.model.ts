@@ -24,12 +24,13 @@ export interface Concurso {
     IsFinish: boolean;
     ParticipacionAnterior: boolean;
     AnnoParticipacionAnterior: string;
+    AceptoTerminos:number,
+    AutorizoDatos:number
 }
 
 export interface Equipo {
     IsFinish: boolean;
     NombreEquipo: string;
-    TipoColegio: string;
     CantEstudiantes: string;
     EquipoMixto: boolean;
     Integrantes: Integrante[];
@@ -58,8 +59,6 @@ export interface Proyecto {
     Idear: string;
     Prototipar: string;
     Validar: string;
-    AceptoTerminos: number;
-    AutorizoDatos: number;
 }
 
 @Injectable({
@@ -93,7 +92,6 @@ export class FormularioRegistro {
             Equipo: {
                 IsFinish: false,
                 NombreEquipo: "",
-                TipoColegio: "",
                 CantEstudiantes: "",
                 EquipoMixto: false,
                 Integrantes: [
@@ -128,13 +126,14 @@ export class FormularioRegistro {
                 Idear: "",
                 Prototipar: "",
                 Validar: "",
-                AceptoTerminos: 0,
-                AutorizoDatos: 0
+
             },
             Concurso: {
                 IsFinish: false,
                 ParticipacionAnterior: false,
-                AnnoParticipacionAnterior: ""
+                AnnoParticipacionAnterior: "",
+                AceptoTerminos: 0,
+                AutorizoDatos: 0
             },
             IsComplete: false,
             CodRegistro: ""

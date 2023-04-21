@@ -9,7 +9,7 @@ import { Formulario } from '../../models/formulario.model';
 @Component({
   selector: 'app-step-two',
   templateUrl: './step-two.component.html',
-  styleUrls: ['../form.component.scss']
+  styleUrls: ['../form.component.scss', './step-two.component.scss']
 })
 export class StepTwoComponent implements OnInit {
 
@@ -17,19 +17,18 @@ export class StepTwoComponent implements OnInit {
   @Input() sendForm: Formulario | null = null;
 
 
-show() {
-console.log(this.form.invalid);
-}
 
-  public departamentos:Departamentos[] = [];
-  public ciudades:Ciudades[]=[];
+
+  public departamentos: Departamentos[] = [];
+  public ciudades: Ciudades[] = [];
   public form!: FormGroup;
+  public deptoSelectedName:string = '';
 
 
 
   constructor(
     private formBuilder: FormBuilder,
-    private formService:FormularioService
+    private formService: FormularioService
 
   ) {
     this.buildForm();
@@ -40,45 +39,47 @@ console.log(this.form.invalid);
     this.getDeptos();
   }
 
-  getDeptos(){
-    this.formService.getDepartamentos().subscribe((data:any)=>{
-     this.departamentos = data.data;
+  getDeptos() {
+    this.formService.getDepartamentos().subscribe((data: any) => {
+      this.departamentos = data.data;
+      console.log(this.departamentos);
     })
   }
 
-  getCityByDepto(){
-    console.log(this.form);
+  getCityByDepto() {
+ 
     let idDepto = this.form.get('Departamento')?.value;
-    this.formService.getCiudades(idDepto).subscribe((data:any)=>{
+    this.deptoSelectedName = this.departamentos.filter(item => item.departamentoID == idDepto)[0].nombreDepartamento;  
+    this.formService.getCiudades(idDepto).subscribe((data: any) => {
       this.ciudades = data.data;
     })
-    
+
   }
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      IsFinish:[true],
+      IsFinish: [true],
       NombreColegio: ['', [Validators.required, Validators.maxLength(100)]],
-      Direccion: ['' , [Validators.required, Validators.maxLength(100)],],
+      Direccion: ['', [Validators.required, Validators.maxLength(100)],],
       Pais: ['Colombia'],
-      Departamento: ['' , Validators.required],
-      Ciudad: ['' , Validators.required],
+      Departamento: ['', Validators.required],
+      Ciudad: ['', Validators.required],
     })
   }
 
-  get institutionField(){
+  get institutionField() {
     return this.form.get('NombreColegio');
   }
 
-  get direccionField(){
+  get direccionField() {
     return this.form.get('Direccion');
   }
 
-  get paidField(){
+  get paidField() {
     return this.form.get('pais');
   }
 
-  get DepartamentoField(){
+  get DepartamentoField() {
     return this.form.get('Departamento');
   }
 
@@ -86,9 +87,10 @@ console.log(this.form.invalid);
 
     if (this.sendForm !== null) {
       this.sendForm.Colegio = this.form.value;
+      this.sendForm.Colegio.Departamento = this.deptoSelectedName;
       this.isValid.emit(true);
     }
-    
-    }
+
+  }
 
 }

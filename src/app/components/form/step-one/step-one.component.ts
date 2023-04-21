@@ -1,11 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { Formulario, FormularioRegistro } from "../../models/formulario.model";
+import { FormularioService } from "../../../service/formulario.service";
 
 @Component({
   selector: 'app-step-one',
   templateUrl: './step-one.component.html',
-  styleUrls: ['../form.component.scss']
+  styleUrls: ['../form.component.scss', './step-one.component.scss']
 })
 export class StepOneComponent implements OnInit {
 
@@ -20,6 +21,7 @@ export class StepOneComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private formService: FormularioService
 
   ) {
     this.buildForm();
@@ -58,6 +60,10 @@ export class StepOneComponent implements OnInit {
   //phone
   get phoneField() {
     return this.form.get('Celular');
+  }
+
+  checkRegisters(){
+    //this.isValid.emit(true);
   }
 
   save() {

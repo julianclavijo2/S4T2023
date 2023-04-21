@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder, FormArray } from "@angular/forms";
+import { Formulario } from '../../models/formulario.model';
 
 @Component({
   selector: 'app-step-three',
   templateUrl: './step-three.component.html',
-  styleUrls: ['../form.component.scss']
+  styleUrls: ['../form.component.scss', './step-three.component.scss']
 })
 export class StepThreeComponent implements OnInit {
 
-  public showDinamicField: any[] = [];
+  public showDinamicField: boolean[] = [];
   public form!: FormGroup;
+  @Output() isValid = new EventEmitter<boolean>();
+  @Input() sendForm: Formulario | null = null;
+
   constructor(
     private formBuilder: FormBuilder,
   ) {
@@ -23,9 +27,8 @@ export class StepThreeComponent implements OnInit {
     this.form = this.formBuilder.group({
       IsFinish: [true],
       NombreEquipo: ['', [Validators.required, Validators.maxLength(100)]],
-      TipoColegio: ['', [Validators.required, Validators.maxLength(100)],],
       CantEstudiantes: ['', Validators.required],
-      EquipoMixto: ['', Validators.required],
+      EquipoMixto: ['false', Validators.required],
       Integrantes: this.formBuilder.array([
 
       ])
@@ -51,6 +54,10 @@ export class StepThreeComponent implements OnInit {
     return this.form.get('Integrantes') as FormArray;
   }
 
+  get EstudianteGradoField(){
+    return this.form.get('EstudianteGrado');
+  }
+
 
   addStudents() {
  
@@ -61,9 +68,8 @@ export class StepThreeComponent implements OnInit {
       
       arrayIntegrantes.push(
         this.formBuilder.group({
-          EstudianteGrado: "",
-          EstudianteGrupoEtnico: "false",
-          GrupoEtnico: ""
+          EstudianteGrado: ['' , Validators.required],
+          EstudianteGrupoEtnico: ['false' , [Validators.required]],
         })
       )
     }
@@ -71,13 +77,29 @@ export class StepThreeComponent implements OnInit {
   }
 
   test(){
-    this.showDinamicField.push('true');
+    console.log(this.form.value);
   }
 
 
+  pushEtnicoField(i:number){
+    this.showDinamicField[i] = true;
+   const integrante = this.IntegrantesField.at(i) as FormGroup;
+   integrante.setControl('GrupoEtnico' , new FormControl('' , [Validators.required]));
+   console.log(this.form.value)
+  }
+
+  deleteEtnicoField(i:number){
+    const integrante = this.IntegrantesField.at(i) as FormGroup;
+    integrante.removeControl('GrupoEtnico');
+    console.log(this.form.value);
+  }
+
 
   save() {
-
+   if (this.sendForm !== null) {
+      this.sendForm.Equipo = this.form.value;
+      this.isValid.emit(true);
+    }
   }
 
 }

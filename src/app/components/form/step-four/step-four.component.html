@@ -1,0 +1,124 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+
+    <div class="input-container">
+        <label for="">Nombre de la propuesta</label> <br>
+        <input [class.is-valid]="NombreProyectoField?.valid"
+            [class.is-invalid]="NombreProyectoField?.invalid && NombreProyectoField?.touched" type="text"
+            formControlName="NombreProyecto"><br>
+        <small
+            *ngIf="NombreProyectoField?.touched  && NombreProyectoField?.hasError('required') && NombreProyectoField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="NombreProyectoField?.hasError('maxlength')">* El nombre del proyecto debe tener máximo 40
+            caracteres.</small>
+        <br><br>
+
+        {{NombreProyectoField?.valid}}
+        <br><br>
+    </div>
+    <div class="input-container">
+        <label for="">¿A qué temática pertenece el problema que quieren resolver?</label> <br>
+        <textarea rows="5" [class.is-valid]="TematicaField?.valid"
+            [class.is-invalid]="TematicaField?.invalid && TematicaField?.touched" 
+            formControlName="Tematica"></textarea><br>
+        <small
+            *ngIf="TematicaField?.touched  && TematicaField?.hasError('required') && TematicaField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="TematicaField?.hasError('maxlength')">* La temática debe tener máximo 30
+            caracteres.</small>
+        <br><br>
+
+        {{TematicaField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Empatizar</label> <br>
+        <textarea rows="5" [class.is-valid]="EmpatizarField?.valid"
+            [class.is-invalid]="EmpatizarField?.invalid && EmpatizarField?.touched" 
+            formControlName="Empatizar"></textarea><br>
+        <small
+            *ngIf="EmpatizarField?.touched  && EmpatizarField?.hasError('required') && EmpatizarField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="EmpatizarField?.hasError('maxlength')">* El campo empatizar  debe tener máximo 840
+            caracteres.</small>
+        <br><br>
+
+        {{EmpatizarField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Definir</label> <br>
+        <textarea rows="5" [class.is-valid]="DefinirField?.valid"
+            [class.is-invalid]="DefinirField?.invalid && DefinirField?.touched" 
+            formControlName="Definir"></textarea><br>
+        <small
+            *ngIf="DefinirField?.touched  && DefinirField?.hasError('required') && DefinirField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="DefinirField?.hasError('maxlength')">* El campo definir debe tener máximo 840
+            caracteres.</small>
+        <br><br>
+
+        {{DefinirField?.valid}}
+        <br><br>
+    </div>
+
+
+    <div class="input-container">
+        <label for="">Idear</label> <br>
+        <textarea rows="5" [class.is-valid]="IdearField?.valid"
+            [class.is-invalid]="IdearField?.invalid && IdearField?.touched" 
+            formControlName="Idear"></textarea><br>
+        <small
+            *ngIf="IdearField?.touched  && IdearField?.hasError('required') && IdearField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="IdearField?.hasError('maxlength')">* El campo Idear debe tener máximo 560
+            caracteres.</small>
+        <br><br>
+
+        {{IdearField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Prototipar</label> <br>
+        <textarea rows="5" [class.is-valid]="PrototiparField?.valid"
+            [class.is-invalid]="PrototiparField?.invalid && PrototiparField?.touched" 
+            formControlName="Prototipar"></textarea><br>
+        <small
+            *ngIf="PrototiparField?.touched  && PrototiparField?.hasError('required') && PrototiparField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="PrototiparField?.hasError('maxlength')">* El campo Prototipar debe tener máximo 840
+            caracteres.</small>
+        <br><br>
+
+        {{PrototiparField?.valid}}
+        <br><br>
+    </div>
+
+    <div class="input-container">
+        <label for="">Validar</label> <br>
+        <textarea rows="5" [class.is-valid]="ValidarField?.valid"
+            [class.is-invalid]="ValidarField?.invalid && ValidarField?.touched" 
+            formControlName="Validar"></textarea><br>
+        <small
+            *ngIf="ValidarField?.touched  && ValidarField?.hasError('required') && ValidarField?.value == '' ">*
+            Campo requerido (*)</small>
+        <small *ngIf="ValidarField?.hasError('maxlength')">* El campo Validar debe tener máximo 560
+            caracteres.</small>
+        <br><br>
+
+        {{ValidarField?.valid}}
+        <br><br>
+    </div>
+
+
+
+
+
+    FORMULARIO INVALIDO ? :{{form.invalid}}
+
+
+    <br><br>
+    <button [disabled]="form.invalid" type="submit">Siguiente</button>
+</form>

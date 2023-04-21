@@ -57,9 +57,9 @@
 
     <div class="input-container">
         <label for="">Ciudad:</label> <br>
-        <select  formControlName="Ciudad" (change)="getCityByDepto()" (change)="show()">
+        <select  formControlName="Ciudad">
             <option value="" selected>Selecciona una ciudad (*)</option>
-            <option value="{{ciudad.ciudadID}}" *ngFor="let ciudad of ciudades ">{{ciudad.nombreCiudad}}</option>
+            <option value="{{ciudad.nombreCiudad}}" *ngFor="let ciudad of ciudades ">{{ciudad.nombreCiudad}}</option>
         </select>
         <br><br>
             {{DepartamentoField?.valid}}
