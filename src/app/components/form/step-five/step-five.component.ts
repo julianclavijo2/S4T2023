@@ -46,11 +46,9 @@ export class StepFiveComponent implements OnInit {
     a.setControl('AnnoParticipacionAnterior' , new FormControl('' , [Validators.required]));
     this.showYears = true;
     console.log(this.form.value);
-
   }
 
   deleteYear() {
-    
     this.showYears = false;
     this.form.removeControl('AnnoParticipacionAnterior');
     console.log(this.form.value);
@@ -60,9 +58,7 @@ export class StepFiveComponent implements OnInit {
     let yearsArray = this.AnnoParticipacionAnteriorField?.value;
     console.log(yearsArray);
 
-/*     this.AnnoParticipacionAnterior?.setValue(yearsArray.toString());
-
-    console.log(this.form.value); */
+     
     
 
   } 
